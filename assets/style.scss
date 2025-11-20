@@ -1,0 +1,69 @@
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+@media (min-width: 2560px) {
+  html {
+    font-size: 0.90vw;
+  }
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 2rem 0 0;
+  scroll-behavior: smooth;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #252525;
+  background-color: #f6f6f6;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #003667;
+}
+
+header {
+  display: flex;
+  gap: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #505050;
+  margin-bottom: 2rem;
+  & > .photo-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    & > img {
+      display: block;
+      overflow: hidden;
+      border-radius: 50%;
+      aspect-ratio: 1;
+      height: 8rem;
+    }
+  }
+  & > .info {
+    & > h1 {
+      margin-bottom: 0.5rem;
+    }
+    & > .contact, & > .links {
+      display: flex;
+      gap: 0.75rem;
+      & > a {
+        font-size: 1rem;
+        color: inherit;
+      }
+    }
+    & > .location {
+      color: #424242;
+    }
+  }
+}
