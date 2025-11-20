@@ -20,6 +20,14 @@ body {
   background-color: #f6f6f6;
 }
 
+p, span, a, ul > li {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
 h1, .h1, h2, .h2, h3, .h3 {
   font-family: "Segoe UI", sans-serif;
   margin: 0;
@@ -28,8 +36,22 @@ h1, .h1, h2, .h2, h3, .h3 {
 
 h1 {
   font-size: 1.5rem;
+  line-height: 1.4;
   font-weight: 600;
   color: #003667;
+}
+
+h2 {
+  font-size: 1.25rem;
+  line-height: 1.2;
+  padding-top: 0.2rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.2rem;
+  line-height: 1.25;
+  font-weight: 500;
 }
 
 header {
@@ -64,6 +86,43 @@ header {
     }
     & > .location {
       color: #424242;
+    }
+  }
+}
+
+section {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  & > h2 {
+    padding-left: .3rem;
+    border-left: 0.25rem solid #003667;
+    margin-bottom: .25rem;
+  }
+  & > *:not(h2) {
+    padding-left: 0.5rem;
+  }
+}
+
+section.experience, section.education {
+  & > .exp-item, & > .edu-item {
+    & > .title {
+      color: #424242;
+      display: inline-flex;
+      gap: 0.3rem;
+      font-size: 1rem;
+      & > .position {
+        color: #252525;
+      }
+    }
+    & > .duration {
+      color: #424242;
+    }
+    & > .desc {
+      & > ul {
+        margin: 0;
+        list-style-type: square;
+        padding: 0 0 0 1.5rem;
+      }
     }
   }
 }
