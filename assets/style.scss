@@ -91,6 +91,8 @@ header {
 }
 
 section {
+  break-inside: avoid;
+  page-break-inside: avoid;
   margin-top: 1rem;
   margin-bottom: 1.5rem;
   & > h2 {
@@ -129,5 +131,67 @@ section.experience, section.education, section.projects {
         padding: 0 0 0 1.5rem;
       }
     }
+  }
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 1.2em 2.2em;
+  margin-top: 0.5em;
+}
+
+.skills-group {
+  border-radius: 8px;
+  padding: 1em 1em 0.4em;
+  margin-bottom: 0.5em;
+}
+
+.skills-group h3 {
+  font-size: 1.06em;
+  color: #003667;
+  margin-bottom: 0.6em;
+}
+
+.skill {
+  display: flex;
+  align-items: center;
+  font-size: 0.98em;
+  margin-bottom: 8px;
+}
+
+.skill > span:first-child {
+  min-width: 140px;
+  flex-shrink: 0;
+}
+
+.bar-wrap {
+  width: 120px;
+  background: #e4eaf3;
+  border-radius: 8px;
+  height: 13px;
+  overflow: hidden;
+  margin: 0 12px;
+  flex-shrink: 0;
+}
+
+.bar-fill {
+  background: #014e96;
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.7s;
+}
+
+.skill > span:last-child {
+  min-width: 90px;
+}
+
+@media print {
+  body {
+    background: #fff !important;
+  }
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.9em 1em !important;
   }
 }
