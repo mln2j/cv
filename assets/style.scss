@@ -2,6 +2,7 @@
 html {
   box-sizing: border-box;
   font-size: 13px;
+  height: 100%; /* Ensure html takes full height on screen */
 }
 
 *, *:before, *:after {
@@ -15,19 +16,20 @@ body {
   font-family: "Segoe UI", "Roboto", Helvetica, Arial, sans-serif;
   color: #333;
   line-height: 1.4;
+  height: 100%; /* Ensure body takes full height on screen */
 }
 
 /* --- A4 STRANICA (CONTAINER) --- */
 .page {
   background: white;
   width: 210mm;
-  height: 296mm; /* Za ekran */
+  min-height: 296mm; /* Use min-height for screen to allow content to push it */
   display: grid;
   grid-template-columns: 260px 1fr;
   margin: 20px auto;
   box-shadow: 0 0 15px rgba(0,0,0,0.3);
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* Keep overflow hidden for screen */
 }
 
 /* --- ZAJEDNIČKI STILOVI --- */
@@ -199,42 +201,51 @@ section h2 {
   color: #444;
 }
 
-/* --- PRINT CONFIGURATION (FIXED) --- */
+/* --- PRINT CONFIGURATION (FINAL ATTEMPT) --- */
 @media print {
   @page {
-    margin: 0;
+    margin: 0; /* Nema margina pisača */
     size: A4 portrait;
   }
 
   html, body {
-    width: 210mm;
-    height: 100%; /* Pusti da content definira visinu */
-    margin: 0;
-    padding: 0;
-    background: white;
+    width: 210mm !important;
+    height: 297mm !important; /* Eksplicitna A4 visina */
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important; /* Default background */
+  }
+
+  body {
+    /* Ovaj gradijent osigurava plavi stupac na svim stranicama */
+    background: linear-gradient(to right, #003667 0%, #003667 260px, #fff 260px, #fff 100%) !important;
+    background-size: 100% calc(297mm + 1px) !important; /* Prisilno pokriva cijelu A4 visinu + 1px overshoot */
+    background-repeat: repeat-y !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .page {
-    margin: 0;
-    padding: 0;
-    border: none;
-    box-shadow: none;
-    width: 210mm;
-    /* height: 297mm; OPREZ: Fiksna visina može raditi probleme ako pisač ima hardverske margine */
-    min-height: 296mm;
-    page-break-after: always;
-    break-after: page;
-    overflow: hidden; /* Odreži sve što viri */
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: 210mm !important;
+    height: 297mm !important; /* Eksplicitna A4 visina */
+    min-height: 297mm !important; /* Dodatna sigurnost */
+    page-break-after: always !important;
+    break-after: page !important;
+    overflow: hidden !important; /* Odreži sve što viri */
   }
 
-  /* Osiguraj točne boje */
+  /* Ensure exact colors */
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  /* Sakrij scrollbarove */
-  ::-webkit-scrollbar { display: none; }
+  /* Hide scrollbars */
+  ::-webkit-scrollbar { display: none !important; }
 }
 
 /* --- SCREEN RESPONSIVE --- */
