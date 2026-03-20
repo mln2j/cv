@@ -1,0 +1,53 @@
+name: Deploy CV to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Ili 'master', ovisno kako ti se zove glavna grana
+
+# Postavljamo dopuštenja za GITHUB_TOKEN kako bi mogao deployati na Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Dozvoljavamo samo jedan deploy u isto vrijeme
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Sass
+        run: npm install -g sass
+
+      - name: Compile SCSS to CSS
+        run: sass assets/style.scss assets/style.css
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
