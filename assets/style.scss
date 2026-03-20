@@ -136,7 +136,9 @@ section.experience, section.education, section.projects {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  /* max(260px, 45%) osigurava da je element širok bar 45% (pa stanu max 2),
+     ali ne uži od 260px (pa na malim ekranima prelazi u 1 stupac) */
+  grid-template-columns: repeat(auto-fit, minmax(max(260px, 45%), 1fr));
   gap: 1.2em 2.2em;
   margin-top: 0.5em;
 }
